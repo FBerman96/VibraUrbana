@@ -9,7 +9,7 @@ import Register from './pages/Register';
 import Cart from './pages/Cart';
 import AdminPanel from './pages/AdminPanel';
 import ContactForm from './pages/ContactForm';
-import AboutUs from './pages/AboutUs'; // Nueva página
+import AboutUs from './pages/AboutUs'; 
 
 import ProtectedRoute from './components/ProtectedRoute'; 
 import { CartProvider } from './context/CartContext'; 

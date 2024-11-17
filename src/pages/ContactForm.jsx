@@ -27,7 +27,7 @@ const ContactForm = () => {
     link.click();
 
     toast.success("Formulario enviado exitosamente.", {
-      position: "top-center"
+      position: "top-center",
     });
 
     setFormData({
@@ -55,61 +55,104 @@ const ContactForm = () => {
 
   return (
     <div className="container mt-5">
-      <h1 className="text-center">Contáctenos</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="firstName" className="form-label">Nombre</label>
-          <input
-            type="text"
-            className="form-control"
-            id="firstName"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            required
-          />
+    <div className="card shadow-lg">
+      <div
+        className="card-header"
+        style={{
+          backgroundColor: "rgba(255, 108, 83, 0.9)", 
+          color: "#ffffff", 
+          textAlign: "center",
+        }}
+      >
+        <h2>Contactanos</h2>
         </div>
-        <div className="mb-3">
-          <label htmlFor="lastName" className="form-label">Apellido</label>
-          <input
-            type="text"
-            className="form-control"
-            id="lastName"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            required
-          />
+        <div className="card-body">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="firstName" className="form-label">
+                Nombre
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="firstName"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                placeholder="Ingrese su nombre"
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="lastName" className="form-label">
+                Apellido
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="lastName"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                placeholder="Ingrese su apellido"
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">
+                Correo Electrónico
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="ejemplo@correo.com"
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="message" className="form-label">
+                Consulta
+              </label>
+              <textarea
+                className="form-control"
+                id="message"
+                name="message"
+                rows="4"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Escriba su mensaje aquí..."
+                required
+              ></textarea>
+            </div>
+            <div className="d-flex justify-content-between mt-4">
+              <button type="submit" className="btn btn-success btn-lg"
+               style={{
+                backgroundColor: "#007bff", // Azul predeterminado
+                borderColor: "#007bff", // Borde azul
+                color: "#fff", // Texto blanco
+                fontWeight: "bold",
+              }}
+              >
+                Enviar
+              </button>
+              <button
+                type="button"
+                className="btn btn-danger btn-lg"
+                onClick={handleReset}
+              >
+                Vaciar
+              </button>
+            </div>
+          </form>
         </div>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">Correo Electrónico</label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
+        <div className="card-footer text-center text-muted">
+          Gracias por confiar en nosotros. Responderemos a la brevedad.
         </div>
-        <div className="mb-3">
-          <label htmlFor="message" className="form-label">Consulta</label>
-          <textarea
-            className="form-control"
-            id="message"
-            name="message"
-            rows="4"
-            value={formData.message}
-            onChange={handleChange}
-            required
-          ></textarea>
-        </div>
-        <div className="d-flex justify-content-between">
-          <button type="submit" className="btn btn-primary">Enviar</button>
-          <button type="button" className="btn btn-danger" onClick={handleReset}>Vaciar</button>
-        </div>
-      </form>
+      </div>
       <ToastContainer
         position="top-center"
         autoClose={3000}
