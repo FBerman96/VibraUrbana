@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './AboutUs.css'; // Archivo CSS para estilos personalizados
+import './AboutUs.css';
 
 const AboutUs = () => {
   return (

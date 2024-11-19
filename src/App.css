@@ -1,206 +1,136 @@
+body, html {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
 #root {
   display: flex;
   flex-direction: column;
   flex: 1;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
 }
 
-div#root{
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-body, html {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  padding: 0;
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-.carousel img {
-  max-height: 400px;
-  object-fit: cover; 
-}
-
-
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
-}
-
-html{
-  overflow: auto;
-}
-
-.carousel {
-  margin-bottom: 50px; 
-}
-
-h2 {
-  text-align: center; 
-  margin-top: 30px; 
-    margin-bottom: 20px; 
-  color: #333; 
-}
-
-
-.container {
-  padding: 20px 50px; 
-}
-
-.featured-products .col-md-4 {
-  padding: 20px; 
-  margin-bottom: 30px; 
-}
+/* Header - Estilo de punta a punta */
 header {
-  margin-bottom: 100px; 
+  width: 100%; /* Ocupa todo el ancho */
+  box-shadow: 0 4px 8px rgba(233, 144, 85, 0.1);
+  position: relative;
+  z-index: 10;
+  
 }
 
-.header-footer {
-  margin-top: auto;
-  background-color: #f8f9fa; /* Fondo neutro claro */
-  padding: 20px 0;
-  text-align: center;
-  font-weight: 600;
+header nav {
+  max-width: 1280px; /* Limita el contenido a un ancho */
+  margin: 0 auto; /* Centra el contenido */
+  padding: 0 20px; /* Espaciado horizontal */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffafbd;
 }
 
-.container-fullwidth {
-  width: 100%;  
-  background-color: white; 
-  padding: 20px; 
-}
-
-.navbar {
-  background-color: rgba(255, 255, 255, 0.9); /* Fondo translúcido */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-}
-
+/* Footer - Estilo de punta a punta */
 footer {
-  background-color: #f0f0f0; /* Fondo neutro claro */
-}
-
-
-.navbar-nav .nav-link, footer a {
-  color: #000000;
-  transition: transform 0.2s ease, color 0.2s ease;
-  font-family: 'Poppins', sans-serif; 
-  font-weight: 600; 
-}
-
-.navbar-nav .nav-link:hover, footer a:hover {
-  transform: scale(1.1); 
-  color: #ffafbd !important;
-
-}
-
-footer a.nav-link {
-  display: inline-block;
-  padding: 0;
-  margin: 0;  /* Aseguramos que no haya márgenes no deseados alrededor del texto */
-}
-
-footer a.nav-link.me-2 {
-  margin-left: 1em;  /* Añade un espacio (1rem) entre Facebook e Instagram */
-}
-
-footer a.nav-link:hover {
-  color: #ffafbd !important;
-  transform: scale(1.1) !important;
-  text-decoration: underline !important;
-}
-
-.carousel-caption h3, 
-.carousel-caption p {
-    color: black; 
-    padding: 10px;
-    border-radius: 8px;
-}
-.toast-fixed {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 1050; 
-}
-
-/* Estilos globales compartidos por ambos footers */
-footer {
-  background-color: #f8f9fa;
-  padding: 20px 0;
-  text-align: center;
+  width: 100%; /* Ocupa todo el ancho */
+  background-color: rgba(255, 108, 83, 0.9); /* Fondo color suave */
+  padding: 40px 0; /* Espaciado superior e inferior */
+  text-align: center; /* Centra el texto */
   font-weight: 600;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); /* Sombra más suave */
+  color: #fff; /* Color de texto blanco para contraste */
+}
+
+footer .content {
+  max-width: 1280px; /* Limita el contenido a un ancho */
+  margin: 0 auto; /* Centra el contenido */
+  padding: 0 20px; /* Espaciado horizontal */
 }
 
 footer h5 {
-  color: #333;
+  font-size: 1.5rem; /* Tamaño del título */
+  color: #fff; /* Color blanco */
+  margin-bottom: 10px; /* Espacio inferior */
+  font-family: 'Poppins', sans-serif; /* Fuente moderna */
 }
 
 footer p {
   margin: 0;
-  color: #333;
+  font-size: 1rem;
+  color: #e5e5e5; /* Color del texto ligeramente más suave */
 }
 
 footer a {
-  color: #000;
+  color: #fff; /* Color blanco para los enlaces */
   text-decoration: none;
-  transition: transform 0.2s ease, color 0.2s ease; /* Efecto de transición */
+  transition: color 0.3s ease, transform 0.3s ease; /* Transición suave */
+  font-weight: 600;
 }
 
-/* Aumenta la especificidad del selector y agrega !important para el hover */
 footer a:hover {
-  color: #ffafbd !important;       /* Asegúrate que el hover funcione */
-  transform: scale(1.1) !important; /* Forzar el cambio de tamaño */
-  text-decoration: underline !important;
+  color: #ffafbd; /* Color en hover */
+  transform: scale(1.05); /* Efecto de aumento */
+  text-decoration: underline; /* Subrayado al pasar el cursor */
+}
+
+footer .social-links {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Espacio entre íconos */
+}
+
+footer .social-links a {
+  color: #fff; /* Color blanco en los iconos */
+  font-size: 1.5rem; /* Tamaño de los íconos */
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+footer .social-links a:hover {
+  color: #ffafbd; /* Color de hover para los íconos */
+  transform: scale(1.1); /* Efecto de aumento */
+}
+
+
+
+
+/* Estilo para el nav */
+.navbar {
+  width: 100%; /* Asegura que el nav ocupe todo el ancho */
+  background-color: rgba(255, 108, 83, 0.9);
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); /* Sombra más suave */
+  
+}
+
+.navbar-nav .nav-link {
+  color: #ffffff;
+  transition: transform 0.2s ease, color 0.2s ease;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+.navbar-nav .nav-link:hover {
+  transform: scale(1.13);
+  color: #e5dea1 !important;
+}
+
+/* General */
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #faeecb 0%, #ffc3a0 100%);
+}
+
+html {
+  overflow: auto;
 }
 
 .container {
   max-width: 1280px;
   margin: 0 auto;
-}
-
-.container py-4 {
-  padding: 20px 0;
+  padding: 20px;
 }
 
 .row {
@@ -211,5 +141,33 @@ footer a:hover {
 
 .col-md-4 {
   margin-bottom: 20px;
+}
+
+mt-4 {
+  text-align: center;
+}
+
+.social-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7d79b; /* Color de fondo del botón */
+  border-radius: 50%; /* Hace que sea circular */
+  width: 50px; /* Ancho del botón */
+  height: 50px; /* Alto del botón */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none; /* Quita el subrayado */
+}
+
+.social-button img {
+  width: 24px; /* Tamaño del ícono */
+  height: 24px;
+}
+
+.social-button:hover {
+  transform: scale(1.1); /* Efecto de zoom al pasar el mouse */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más intensa */
+  background-color: #ffafbd; /* Cambio de color al pasar el mouse */
 }
 

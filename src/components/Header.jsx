@@ -1,14 +1,18 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import logo from '../assets/logo.png';
+
 
 const Header = () => {
   const { currentUser, logout } = useContext(AuthContext);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg">
       <div className="container">
-        <Link className="navbar-brand" to="/">Vibra Urbana</Link>
+      <Link className="navbar-brand" to="/">
+  <img src={logo} alt="Vibra Urbana Logo" style={{ height: '90px', width: 'auto' }} />
+</Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -23,10 +27,10 @@ const Header = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/products">Products</Link>
+              <Link className="nav-link" to="/products">Productos</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/cart">Cart</Link>
+              <Link className="nav-link" to="/cart">Carrito</Link>
             </li>
             {!currentUser ? (
               <>
@@ -34,7 +38,7 @@ const Header = () => {
                   <Link className="nav-link" to="/login">Login</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/register">Register</Link>
+                  <Link className="nav-link" to="/register">Registrarse</Link>
                 </li>
               </>
             ) : (
