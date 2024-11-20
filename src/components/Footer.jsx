@@ -17,8 +17,8 @@ const Footer = () => {
             <p>&copy; 2024 Vibra Urbana. All rights reserved.</p>
           </div>
           <div className="col-md-4 text-center">
-            <Link to="/contacto" className="nav-link text-decoration-none">Contáctenos</Link><br />
-            <Link to="/acerca-de-nosotros" className="nav-link text-decoration-none">Acerca de nosotros</Link>
+            <Link to="/contacto" className="footer-link">Contáctenos</Link><br />
+            <Link to="/acerca-de-nosotros" className="footer-link">Acerca de nosotros</Link>
           </div>
           <div className="col-md-4 text-center text-md-end">
             <p>Síguenos en redes sociales</p>

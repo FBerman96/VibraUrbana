@@ -14,6 +14,8 @@ body, html {
   flex: 1;
 }
 
+
+
 /* Header - Estilo de punta a punta */
 header {
   width: 100%; /* Ocupa todo el ancho */
@@ -68,6 +70,8 @@ footer a {
   text-decoration: none;
   transition: color 0.3s ease, transform 0.3s ease; /* Transición suave */
   font-weight: 600;
+  display: inline-block; /* Asegura que el enlace sea un bloque en línea */
+
 }
 
 footer a:hover {
@@ -94,6 +98,18 @@ footer .social-links a:hover {
   transform: scale(1.1); /* Efecto de aumento */
 }
 
+.footer-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #e5dea1; 
+  transform: scale(1.1);
+  text-decoration: underline;
+}
 
 
 

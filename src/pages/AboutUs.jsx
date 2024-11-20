@@ -19,7 +19,7 @@ const AboutUs = () => {
           </p>
         </div>
         <div className="col-md-6 text-center">
-          <img src="../src/assets/VibraUrbana.jpg" alt="Nuestro local" className="img-fluid rounded shadow-lg" />
+          <img src="../src/assets/logo.png" alt="Nuestro local" className="img-fluid rounded shadow-lg" />
         </div>
       </div>
     </div>

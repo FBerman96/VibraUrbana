@@ -10,11 +10,9 @@ import Cart from './pages/Cart';
 import AdminPanel from './pages/AdminPanel';
 import ContactForm from './pages/ContactForm';
 import AboutUs from './pages/AboutUs'; 
-
 import ProtectedRoute from './components/ProtectedRoute'; 
 import { CartProvider } from './context/CartContext'; 
 import { AuthProvider } from './context/AuthContext'; 
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {

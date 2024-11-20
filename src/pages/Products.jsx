@@ -41,13 +41,12 @@ const Products = () => {
     toast.success(`${product.name} añadido al carrito!`, {
       position: "top-center",
       autoClose: 3000,
-      hideProgressBar: true,
+      hideProgressBar: false, // Mostrar la barra de progreso
       closeOnClick: true,
       pauseOnHover: false,
       draggable: false,
       style: {
-        backgroundColor: "#348C41", // Fondo verde
-        color: "white", // Texto blanco
+        color: "white", // Texto blanco para el tema oscuro
         fontWeight: "bold",
         fontSize: "16px",
         textAlign: "center",
@@ -93,7 +92,20 @@ const Products = () => {
           </div>
         ))}
       </div>
-      <ToastContainer />
+      
+      {/* ToastContainer con tema oscuro aplicado */}
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false} // Mostrar la barra de progreso
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark" // Aplicando el tema oscuro a todos los toasts
+      />
     </div>
   );
 };
