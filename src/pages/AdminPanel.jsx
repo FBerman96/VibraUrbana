@@ -1,21 +1,24 @@
-// AdminPanel.jsx
 import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { Modal, Button } from 'react-bootstrap';
+import DataTable from 'react-data-table-component';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AdminPanel = () => {
   const { currentUser } = useContext(AuthContext);
   const [users, setUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null); // Usuario seleccionado para editar
-  const [showModal, setShowModal] = useState(false); // Estado para controlar el modal
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [updatedUser, setUpdatedUser] = useState({
     username: '',
     email: '',
     nombre: '',
     apellido: '',
     password: '',
-    role: '' // Incluimos el rol en los datos a actualizar
+    role: '',
   });
 
   const navigate = useNavigate();
@@ -24,74 +27,90 @@ const AdminPanel = () => {
     if (!currentUser || currentUser.role !== 'admin') {
       navigate('/');
     }
-
     const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
     setUsers(storedUsers);
   }, [currentUser, navigate]);
 
   const deleteUser = (username) => {
-    const updatedUsers = users.filter(user => user.username !== username);
+    const updatedUsers = users.filter((user) => user.username !== username);
     setUsers(updatedUsers);
     localStorage.setItem('users', JSON.stringify(updatedUsers));
+    toast.error(`Usuario ${username} eliminado exitosamente.`, { autoClose: 2000 });
   };
 
   const editUser = (user) => {
     setSelectedUser(user);
-    setUpdatedUser(user); // Cargamos los datos del usuario seleccionado en el formulario
-    setShowModal(true); // Mostrar el modal de edición
+    setUpdatedUser(user);
+    setShowModal(true);
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUpdatedUser((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSaveChanges = () => {
-    const updatedUsers = users.map(user =>
+    const updatedUsers = users.map((user) =>
       user.username === selectedUser.username ? updatedUser : user
     );
     setUsers(updatedUsers);
     localStorage.setItem('users', JSON.stringify(updatedUsers));
-    setShowModal(false); // Cerrar el modal
+    setShowModal(false);
+    toast.success('Usuario actualizado correctamente.', { autoClose: 2000 });
   };
+
+  const handleDeleteConfirmation = (user) => {
+    setSelectedUser(user);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDeleteUser = () => {
+    deleteUser(selectedUser.username);
+    setShowDeleteModal(false);
+  };
+
+  const columns = [
+    { name: 'Username', selector: (row) => row.username, sortable: true },
+    { name: 'Email', selector: (row) => row.email, sortable: true },
+    { name: 'Nombre', selector: (row) => row.nombre, sortable: true },
+    { name: 'Apellido', selector: (row) => row.apellido, sortable: true },
+    { name: 'Role', selector: (row) => row.role, sortable: true },
+    {
+      name: 'Acciones',
+      cell: (row) => (
+        <>
+          <button className="btn btn-warning me-2" onClick={() => editUser(row)}>
+            Editar
+          </button>
+          <button className="btn btn-danger" onClick={() => handleDeleteConfirmation(row)}>
+            Eliminar
+          </button>
+        </>
+      ),
+    },
+  ];
 
   return (
     <div className="container mt-5">
       <h1>Panel de Administración</h1>
-      {users.length === 0 ? (
-        <p>No hay usuarios registrados.</p>
-      ) : (
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>Role</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user, index) => (
-              <tr key={index}>
-                <td>{user.username}</td>
-                <td>{user.email}</td>
-                <td>{user.nombre}</td>
-                <td>{user.apellido}</td>
-                <td>{user.role}</td>
-                <td>
-                  <button className="btn btn-warning" onClick={() => editUser(user)}>Editar</button>
-                  <button className="btn btn-danger" onClick={() => deleteUser(user.username)}>Eliminar</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+      <DataTable
+        title="Usuarios Registrados"
+        columns={columns}
+        data={users}
+        pagination
+        highlightOnHover
+        customStyles={{
+          table: {
+            style: {
+              backgroundColor: 'white', // Fondo blanco para legibilidad
+              color: '#333', // Texto oscuro para contraste
+            },
+          },
+        }}
+      />
 
       {/* Modal de edición */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
@@ -180,6 +199,37 @@ const AdminPanel = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+
+      {/* Modal de confirmación de eliminación */}
+      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmar Eliminación</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>¿Estás seguro de que quieres eliminar al usuario <b>{selectedUser?.username}</b>?</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+            Cancelar
+          </Button>
+          <Button variant="danger" onClick={confirmDeleteUser}>
+            Eliminar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 };
