@@ -5,18 +5,20 @@ import { Modal, Button } from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const AdminPanel = () => {
   const { currentUser } = useContext(AuthContext);
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [updatedUser, setUpdatedUser] = useState({
     username: '',
     email: '',
     nombre: '',
     apellido: '',
+    fechaNacimiento: '',
     password: '',
     role: '',
   });
@@ -35,13 +37,21 @@ const AdminPanel = () => {
     const updatedUsers = users.filter((user) => user.username !== username);
     setUsers(updatedUsers);
     localStorage.setItem('users', JSON.stringify(updatedUsers));
-    toast.error(`Usuario ${username} eliminado exitosamente.`, { autoClose: 2000 });
+    toast.error(`Usuario ${username} eliminado exitosamente.`, {
+      autoClose: 3000,
+      theme: 'dark',
+    });
   };
 
   const editUser = (user) => {
     setSelectedUser(user);
     setUpdatedUser(user);
-    setShowModal(true);
+    setShowEditModal(true);
+  };
+
+  const confirmDelete = (user) => {
+    setSelectedUser(user);
+    setShowDeleteModal(true);
   };
 
   const handleInputChange = (e) => {
@@ -58,13 +68,11 @@ const AdminPanel = () => {
     );
     setUsers(updatedUsers);
     localStorage.setItem('users', JSON.stringify(updatedUsers));
-    setShowModal(false);
-    toast.success('Usuario actualizado correctamente.', { autoClose: 2000 });
-  };
-
-  const handleDeleteConfirmation = (user) => {
-    setSelectedUser(user);
-    setShowDeleteModal(true);
+    setShowEditModal(false);
+    toast.success('Usuario actualizado correctamente.', {
+      autoClose: 3000,
+      theme: 'dark',
+    });
   };
 
   const confirmDeleteUser = () => {
@@ -77,16 +85,17 @@ const AdminPanel = () => {
     { name: 'Email', selector: (row) => row.email, sortable: true },
     { name: 'Nombre', selector: (row) => row.nombre, sortable: true },
     { name: 'Apellido', selector: (row) => row.apellido, sortable: true },
+    { name: 'Fecha de Nacimiento', selector: (row) => row.fechaNacimiento, sortable: true },
     { name: 'Role', selector: (row) => row.role, sortable: true },
     {
       name: 'Acciones',
       cell: (row) => (
         <>
           <button className="btn btn-warning me-2" onClick={() => editUser(row)}>
-            Editar
+            <i className="bi bi-pencil" style={{ fontSize: '1.2rem' }}></i>
           </button>
-          <button className="btn btn-danger" onClick={() => handleDeleteConfirmation(row)}>
-            Eliminar
+          <button className="btn btn-danger" onClick={() => confirmDelete(row)}>
+            <i className="bi bi-trash" style={{ fontSize: '1.2rem' }}></i>
           </button>
         </>
       ),
@@ -105,15 +114,15 @@ const AdminPanel = () => {
         customStyles={{
           table: {
             style: {
-              backgroundColor: 'white', // Fondo blanco para legibilidad
-              color: '#333', // Texto oscuro para contraste
+              backgroundColor: 'white',
+              color: '#333',
             },
           },
         }}
       />
 
       {/* Modal de edición */}
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
+      <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Editar Usuario</Modal.Title>
         </Modal.Header>
@@ -165,13 +174,13 @@ const AdminPanel = () => {
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="password" className="form-label">Password</label>
+              <label htmlFor="fechaNacimiento" className="form-label">Fecha de Nacimiento</label>
               <input
-                type="password"
-                id="password"
-                name="password"
+                type="date"
+                id="fechaNacimiento"
+                name="fechaNacimiento"
                 className="form-control"
-                value={updatedUser.password}
+                value={updatedUser.fechaNacimiento}
                 onChange={handleInputChange}
               />
             </div>
@@ -185,13 +194,13 @@ const AdminPanel = () => {
                 onChange={handleInputChange}
               >
                 <option value="cliente">Cliente</option>
-                <option value="admin">Admin</option>
+                <option value="admin">Administrador</option>
               </select>
             </div>
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
+          <Button variant="secondary" onClick={() => setShowEditModal(false)}>
             Cancelar
           </Button>
           <Button variant="primary" onClick={handleSaveChanges}>
@@ -218,18 +227,7 @@ const AdminPanel = () => {
         </Modal.Footer>
       </Modal>
 
-      <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
+      <ToastContainer position="top-center" theme="dark" />
     </div>
   );
 };
